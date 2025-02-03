@@ -8,6 +8,8 @@ import footwearsRoutes from "./product/footwears.js";
 import mixtureRoutes from "./product/mixture.js";
 import userRoutes from "./product/signup.js";
 import loginRoutes from "./product/login.js";
+import formRoutes from "./product/form.js";
+
 
 dotenv.config();
 
@@ -25,6 +27,7 @@ app.use('/footwears',footwearsRoutes)
 app.use('/mixture',mixtureRoutes)
 app.use('/',userRoutes) //post route for signup
 app.use('/', loginRoutes); //post route for login
+app.use('/', formRoutes);
 
 const uri = 'mongodb+srv://isha:ishapatel@cluster0.2dsxv.mongodb.net/';
  // Local MongoDB URI
