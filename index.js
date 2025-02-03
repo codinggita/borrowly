@@ -7,21 +7,25 @@ import clothesRoutes from "./product/clothes.js";
 import footwearsRoutes from "./product/footwears.js";
 import mixtureRoutes from "./product/mixture.js";
 
-
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 8080;
-app.use(cors())
+
+// Enable CORS for frontend access
+app.use(cors({
+  origin: "https://borrowly.onrender.com",
+  methods: "GET,POST,PUT,DELETE",
+  allowedHeaders: "Content-Type"
+}));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
-app.use('/accessories',accessoriesRoutes)
-app.use('/clothes',clothesRoutes)
-app.use('/footwears',footwearsRoutes)
-app.use('/mixture',mixtureRoutes)
+app.use('/accessories', accessoriesRoutes);
+app.use('/clothes', clothesRoutes);
+app.use('/footwears', footwearsRoutes);
+app.use('/mixture', mixtureRoutes);
 
 const uri = 'mongodb+srv://isha:ishapatel@cluster0.2dsxv.mongodb.net/';  // Local MongoDB URI
 const dbName = 'products';  // Database name
@@ -44,10 +48,9 @@ MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   });
 
 app.get('/', (req, res) => {
-    res.send('Welcome to Borrowly API');
+  res.send('Welcome to Borrowly API');
 });
 
-
-app.listen(PORT,()=>{
-    console.log(`Server running on ${PORT}`);
-})
+app.listen(PORT, () => {
+  console.log(`Server running on ${PORT}`);
+});
