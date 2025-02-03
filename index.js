@@ -9,7 +9,6 @@ import mixtureRoutes from "./product/mixture.js";
 import userRoutes from "./product/signup.js";
 import loginRoutes from "./product/login.js";
 
-
 dotenv.config();
 
 const app = express();
