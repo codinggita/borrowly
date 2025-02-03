@@ -23,7 +23,7 @@ app.use('/clothes',clothesRoutes)
 app.use('/footwears',footwearsRoutes)
 app.use('/mixture',mixtureRoutes)
 
-const uri = 'mongodb://localhost:27017/';
+const uri = 'mongodb+srv://isha:ishapatel@cluster0.2dsxv.mongodb.net/';
  // Local MongoDB URI
 const dbName = 'products';  // Database name
 
