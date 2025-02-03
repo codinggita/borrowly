@@ -6,6 +6,8 @@ import accessoriesRoutes from "./product/accessories.js";
 import clothesRoutes from "./product/clothes.js";
 import footwearsRoutes from "./product/footwears.js";
 import mixtureRoutes from "./product/mixture.js";
+import userRoutes from "./product/signup.js";
+import loginRoutes from "./product/login.js";
 
 
 dotenv.config();
@@ -22,6 +24,8 @@ app.use('/accessories',accessoriesRoutes)
 app.use('/clothes',clothesRoutes)
 app.use('/footwears',footwearsRoutes)
 app.use('/mixture',mixtureRoutes)
+app.use('/',userRoutes) //post route for signup
+app.use('/', loginRoutes); //post route for login
 
 const uri = 'mongodb+srv://isha:ishapatel@cluster0.2dsxv.mongodb.net/';
  // Local MongoDB URI
@@ -30,8 +34,8 @@ const dbName = 'products';  // Database name
 MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(client => {
     console.log('Connected to MongoDB');
-    const db = client.db(dbName);
-    const usersCollection = db.collection('users');  // Access your collection
+    // const db = client.db(dbName);
+    // const usersCollection = db.collection('users');  // Access your collection
 
     app.get('/', (req, res) => {
       res.send('Welcome to Borrowly!');
