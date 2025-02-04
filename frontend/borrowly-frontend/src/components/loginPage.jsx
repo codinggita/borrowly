@@ -1,0 +1,143 @@
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import '../components/loginPage.css';
+import login from '../assets/login.png';
+
+const Login = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    username: '',
+    password: '',
+    rememberMe: false
+  });
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      // Send login request to your backend using fetch
+      const response = await fetch('https://borrowly.onrender.com/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+
+        // Handle success (you can store the token in localStorage or cookies if using JWT)
+        localStorage.setItem('token', data.token); // If using JWT or a token
+
+        // Redirect to the dashboard (or another page after successful login)
+        navigate('/landingPage'); 
+      } else {
+        // Handle error if login fails
+        alert('Login failed. Please check your credentials. Or register first.');
+      }
+    } catch (error) {
+      // Handle any unexpected errors
+      alert('An error occurred. Please try again.');
+      console.error('Login error:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="login-container">
+      <div className="login-wrapper">
+        {/* Left side - Form */}
+        <div className="login-form-container">
+          <h1>WELCOME!</h1>
+
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <div className="input-wrapper">
+                <input
+                  type="text"
+                  name="username"
+                  value={formData.username}
+                  onChange={handleChange}
+                  placeholder="Username"
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="form-group">
+              <div className="input-wrapper">
+            
+                <input
+                  type="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  placeholder="Password"
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="form-options">
+              <label className="remember-me">
+                <input
+                  type="checkbox"
+                  name="rememberMe"
+                  checked={formData.rememberMe}
+                  onChange={handleChange}
+                />
+                <span>Remember Me</span>
+              </label>
+              <Link to="/forgot-password" className="forgot-password">
+                Forgot Password?
+              </Link>
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="login-button"
+            >
+              {loading ? (
+                'Loading...'
+              ) : (
+                <>
+                
+                  <span>Login</span>
+                </>
+              )}
+            </button>
+          </form>
+
+          <div className="signup-link">
+            <p>
+              Not a member yet?{' '}
+              <Link to="/signup">
+                Signup
+              </Link>
+            </p>
+          </div>
+        </div>
+
+        {/* Right side - Image */}
+        <div className="login-image">
+          <img src={login} alt="Login"/>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Login;
