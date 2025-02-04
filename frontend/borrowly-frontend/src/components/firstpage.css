@@ -1,0 +1,93 @@
+.hero {
+    text-align: center;
+    /* min-height: 100vh; */
+    background: url('../assets/background1.png') no-repeat center center/cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Logo */
+.logo > img {
+    height: 30vh;
+    /* max-height: 120px; */
+    width: auto;
+}
+
+/* Image Container */
+.image-container {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin-top: 25px;
+}
+
+.image-container img {
+    width: 20vw;
+    max-width: 250px;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Button */
+.get-started-btn {
+    margin-top: 40px;
+    padding: 13px 25px;
+    font-size: 16px;
+    background-color: #502d16;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: 0.3s ease-in-out;
+}
+
+.get-started-btn:hover {
+    background-color: #794129;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) { /* Tablet */
+    .image-container img {
+        width: 30vw;
+        max-width: 200px;
+    }
+}
+
+@media (max-width: 768px) { /* Mobile */
+    .logo > img {
+        height: 12vh;
+        max-height: 100px;
+    }
+    
+    .image-container {
+        gap: 10px;
+    }
+
+    .image-container img {
+        width: 40vw;
+        max-width: 180px;
+    }
+
+    .get-started-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) { /* Small Mobile */
+    .image-container img {
+        width: 80vw;
+        max-width: 150px;
+    }
+
+    .get-started-btn {
+        padding: 8px 18px;
+        font-size: 13px;
+    }
+}
