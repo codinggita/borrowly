@@ -7,7 +7,7 @@ const Signup = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: '',
-    email: '',
+    emailOrPhone: '',
     password: '',
     confirmPassword: ''
   });
@@ -49,8 +49,8 @@ const Signup = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          alert('Signup successful! Please login.');
-          navigate('/login');
+          alert('Signup successful!');
+          navigate('/landingPage');
         } else {
           setError(data.message || 'Signup failed');
         }
@@ -88,11 +88,11 @@ const Signup = () => {
             <div className="form-group">
               <div className="input-wrapper">
                 <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
+                  type="text"
+                  name="emailOrPhone"
+                  value={formData.emailOrPhone}
                   onChange={handleChange}
-                  placeholder="Email"
+                  placeholder="Email or Phone"
                   required
                 />
               </div>
@@ -133,7 +133,6 @@ const Signup = () => {
                 'Creating Account...'
               ) : (
                 <>
-                  <span>🖊️</span>
                   <span>Sign Up</span>
                 </>
               )}

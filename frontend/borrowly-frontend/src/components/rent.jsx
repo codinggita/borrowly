@@ -128,6 +128,8 @@ const Rent = () => {
             pincode: "",
           },
         }); // Reset form after successful submission
+        console.log("hello",formData)
+        
         setShowForm(false); // Close the form popup
       } else {
         alert("Error: " + data.message);
@@ -398,6 +400,7 @@ const Rent = () => {
                 value={formData.renter.pincode}
                 onChange={handleChange}
               />
+              
               
               <button type="submit">Submit</button>
             </form>
