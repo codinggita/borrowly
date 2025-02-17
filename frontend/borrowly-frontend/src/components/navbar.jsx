@@ -13,9 +13,10 @@ function Navbar() {
       <div className="logo1"><img src='./src/assets/logo.png'/></div>
       </Link>
       <div className="nav-links">
-        <button onClick={() => handleNavigation('rent')}>Rent</button>
-        <button onClick={() => handleNavigation('borrow')}>Borrow</button>
+        <button onClick={() => handleNavigation('rent')}>RENT</button>
+        <button onClick={() => handleNavigation('borrow')}>BORROW</button>
         <button onClick={() => handleNavigation('cart')}>Cart</button>
+        <button onClick={() => handleNavigation('user')}>User</button>
       </div>
     </div>
   );

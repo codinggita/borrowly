@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
 import '../components/signup.css';
 import signup from '../assets/signup.png';
 
@@ -13,6 +14,9 @@ const Signup = () => {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,20 +24,31 @@ const Signup = () => {
       ...prev,
       [name]: value
     }));
-    // Clear error when user starts typing
+
     if (error) setError('');
+    
+    if (name === 'confirmPassword' || name === 'password') {
+      if (name === 'confirmPassword' && value !== formData.password) {
+        setPasswordError('Passwords do not match!');
+      } else if (name === 'password' && formData.confirmPassword && formData.confirmPassword !== value) {
+        setPasswordError('Passwords do not match!');
+      } else {
+        setPasswordError('');
+      }
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match!');
+      setPasswordError('Passwords do not match!');
       return;
     }
 
     setLoading(true);
     setError('');
+    setPasswordError('');
 
     fetch('https://borrowly.onrender.com/register', {
       method: 'POST',
@@ -49,8 +64,9 @@ const Signup = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          alert('Signup successful!');
-          navigate('/landingPage');
+          if (window.confirm('Registered successfully! Click OK to continue.')) {
+            navigate('/landingPage');
+          }
         } else {
           setError(data.message || 'Signup failed');
         }
@@ -65,9 +81,15 @@ const Signup = () => {
   return (
     <div className="login-container">
       <div className="login-wrapper">
+
+        {/* Right side - Image */}
+        <div className="signup-image">
+          <img src={signup} alt="Signup"/>
+        </div>
+
         {/* Left side - Form */}
         <div className="login-form-container">
-          <h1>CREATE ACCOUNT</h1>
+          <h1>REGISTER !</h1>
           
           {error && <div className="error-message">{error}</div>}
           
@@ -101,58 +123,57 @@ const Signup = () => {
             <div className="form-group">
               <div className="input-wrapper">
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
                   placeholder="Password"
                   required
                 />
+                <span className="eye-icon" onClick={() => setShowPassword(!showPassword)}>
+                  {showPassword ? <FiEye /> : <FiEyeOff />}
+                </span>
               </div>
             </div>
 
             <div className="form-group">
               <div className="input-wrapper">
                 <input
-                  type="password"
+                  type={showConfirmPassword ? "text" : "password"}
                   name="confirmPassword"
                   value={formData.confirmPassword}
                   onChange={handleChange}
                   placeholder="Confirm Password"
                   required
                 />
+                <span className="eye-icon" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
+                  {showConfirmPassword ? <FiEye /> : <FiEyeOff />}
+                </span>
               </div>
             </div>
 
+            {/* Password mismatch error message */}
+            {passwordError && <div className="password-error">{passwordError}</div>}
+
             <button
               type="submit"
-              disabled={loading}
+              disabled={loading || passwordError}
               className="login-button"
             >
-              {loading ? (
-                'Creating Account...'
-              ) : (
-                <>
-                  <span>Sign Up</span>
-                </>
-              )}
+              {loading ? 'Creating Account...' : 'Sign Up'}
             </button>
+
+            <div className='social-media'>Google & Facebook option</div>
           </form>
+
+          <div className="line1"></div>
 
           <div className="signup-link">
             <p>
               Already have an account?{' '}
-              <Link to="/login">
-                Login
-              </Link>
+              <Link to="/login">Login</Link>
             </p>
           </div>
-        </div>
-
-        {/* Right side - Image */}
-        <div className="login-image">
-          <img src={signup} alt="Signup"
-          />
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './navbar.jsx';
 import './rent.css';
+import Footer from './footer.jsx';
 
 const Rent = () => {
   const [formData, setFormData] = useState({
@@ -35,7 +36,7 @@ const Rent = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-  
+
     // Check if the input field belongs to the renter object
     if (name.startsWith("renter.")) {
       const field = name.split(".")[1]; // Extract field name after "renter."
@@ -128,8 +129,8 @@ const Rent = () => {
             pincode: "",
           },
         }); // Reset form after successful submission
-        console.log("hello",formData)
-        
+        console.log("hello", formData)
+
         setShowForm(false); // Close the form popup
       } else {
         alert("Error: " + data.message);
@@ -142,106 +143,69 @@ const Rent = () => {
 
   return (
     <div>
+      <Navbar />
+      <div className='dynamic-data'>
+        
+      </div>
+      <button className="rent-button" onClick={() => setShowForm(true)}>CLICK HERE TO RENT</button>
 
-        <Navbar/>
-
-      {/* Button to trigger the popup */}
-      <button
-        className="rent-button"
-        onClick={() => setShowForm(true)}
-      >
-        CLICK HERE TO RENT
-      </button>
-
-      {/* Modal for the form */}
       {showForm && (
         <div className="modal">
           <div className="modal-content">
-            <span
-              className="close"
-              onClick={() => setShowForm(false)}
-            >
-              &times;
-            </span>
-
+            <span className="close" onClick={() => setShowForm(false)}>&times;</span>
             <form onSubmit={handleSubmit}>
               <h2>Rent Product Form</h2>
-
               <input
                 type="file"
                 name="images.img1"
                 accept="image/*"
-                onChange={(e) => handleImageUpload(e, 'img1')}
-              />
+                onChange={(e) => handleImageUpload(e, 'img1')} />
               <input
                 type="file"
                 name="images.img2"
                 accept="image/*"
-                onChange={(e) => handleImageUpload(e, 'img2')}
-              />
+                onChange={(e) => handleImageUpload(e, 'img2')} />
               <input
                 type="file"
                 name="images.img3"
                 accept="image/*"
-                onChange={(e) => handleImageUpload(e, 'img3')}
-              />
-
+                onChange={(e) => handleImageUpload(e, 'img3')} />
               <input
                 type="text"
                 name="prodName"
                 placeholder="Product Name"
                 value={formData.prodName}
-                onChange={handleChange}
-              />
-
+                onChange={handleChange} />
               <input
                 type="text"
                 name="category"
                 placeholder="Category"
                 value={formData.category}
-                onChange={handleChange}
-              />
+                onChange={handleChange} />
               <input
                 type="text"
                 name="subCategory"
                 placeholder="Sub-Category"
                 value={formData.subCategory}
-                onChange={handleChange}
-              />
+                onChange={handleChange} />
               <input
                 type="text"
                 name="type"
                 placeholder="Type (optional)"
                 value={formData.type}
-                onChange={handleChange}
-              />
+                onChange={handleChange} />
 
-              {/* Gender Buttons */}
               <div>
                 <label>
                   Gender:
-                  <input
-                    type="radio"
-                    name="gender"
-                    value="female"
-                    checked={formData.gender === 'female'}
-                    onChange={handleChange}
-                  />
-                  Female
+                  <input type="radio" name="gender" value="female" checked={formData.gender === 'female'} onChange={handleChange} />Female
                 </label>
                 <label>
-                  <input
-                    type="radio"
-                    name="gender"
-                    value="male"
-                    checked={formData.gender === 'male'}
-                    onChange={handleChange}
-                  />
-                  Male
+                  <input type="radio" name="gender" value="male" checked={formData.gender === 'male'} onChange={handleChange} />Male
                 </label>
               </div>
 
-              {/* Size Buttons */}
+
               <div>
                 <label>
                   Size:
@@ -355,7 +319,7 @@ const Rent = () => {
                 onChange={handleChange}
               />
 
-              
+
 
               {/* Renter Details */}
               <input
@@ -400,13 +364,14 @@ const Rent = () => {
                 value={formData.renter.pincode}
                 onChange={handleChange}
               />
-              
-              
+
+
               <button type="submit">Submit</button>
             </form>
           </div>
         </div>
       )}
+      <Footer />
     </div>
   );
 };

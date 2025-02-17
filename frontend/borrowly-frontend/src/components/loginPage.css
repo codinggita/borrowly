@@ -1,171 +1,142 @@
 .login-container {
-  /* min-height: 100%; */
   display: flex;
-  align-items: center;
   justify-content: center;
-  background-color: #E3CBB3;
-  /* padding: 1rem; */
-  /* background: linear-gradient(135deg, #f5e6d3 0%, #faf0e6 100%); */
+  align-items: center;
+  min-height: 100vh;
+  font-family: josefin sans;
 }
 
 .login-wrapper {
-  /* width: 100%; */
-  /* max-width: 1200px; */
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-  margin: 0 auto;
+  display: flex;
+  overflow: hidden;
+  flex: 1;
+
 }
 
 .login-form-container {
-  background: #E3CBB3;
-  padding: 2rem;
-  height: 100%;
+  flex: 1;
+  padding: 40px;
+  width: 30vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-image {
+  flex: 1;
+}
+
+.login-image img {
+  width: 90%;
+  height: 100vh;
+  object-fit: cover;
+  margin-left: 75px;
 }
 
 .login-form-container h1 {
-  font-size: 2.5rem;
-  color: #5d4037;
-  margin-bottom: 2rem;
   text-align: center;
-}
-
-.error-message {
-  background-color: #fee2e2;
-  color: #dc2626;
-  padding: 0.75rem;
-  border-radius: 0.5rem;
-  margin-bottom: 1rem;
-  text-align: center;
+  margin-bottom: 30px;
+  font-size: 9vh;
+  color: #602E1A;
 }
 
 .form-group {
-  margin-bottom: 1.5rem;
+  margin-bottom: 20px;
 }
 
 .input-wrapper {
   position: relative;
+  border: 1.5px solid #602E1A;
+  border-radius: 5px;
+  width: 60vh;
+
 }
 
-.input-icon {
-  position: absolute;
-  left: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #8d6e63;
-}
-
-input[type="text"],
-input[type="password"],
-input[type="email"] {
-  width: 100%;
-  padding: 1rem 1rem 1rem 3rem;
-  border: 1px solid #ddd;
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  transition: border-color 0.3s ease;
-}
-
-input[type="text"]:focus,
-input[type="password"]:focus,
-input[type="email"]:focus {
+input:focus {
   outline: none;
-  border-color: #8d6e63;
-  box-shadow: 0 0 0 2px rgba(141, 110, 99, 0.2);
+  border: none; 
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 12px;
+  box-sizing: border-box; 
+  font-size: 16px;
+  background-color: #E3CBB3;
 }
 
 .form-options {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 20px;
 }
 
 .remember-me {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  color: #666;
+  color: #602E1A;
+}
+
+.remember-me span {
+  margin-left: 8px;
 }
 
 .forgot-password {
-  color: #8d6e63;
-  font-size: 0.9rem;
-  transition: color 0.3s ease;
-}
-
-.forgot-password:hover {
-  color: #5d4037;
+  color: #602E1A;
 }
 
 .login-button {
   width: 100%;
-  padding: 1rem;
-  background: #8d6e63;
-  color: white;
+  padding: 12px;
+  background-color: #602E1A;
   border: none;
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  transition: background-color 0.3s ease;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease; 
+  margin-left: 9em;
 }
 
 .login-button:hover {
-  background: #5d4037;
+  background-color: #965D45; 
 }
 
 .login-button:disabled {
-  background: #ccc;
-  cursor: not-allowed;
+  background-color: #965D45;
+  cursor: default;
 }
 
+.line1{
+  width: 60vh;
+  height: 0.1vh;
+  background-color: #602E1A ;
+  margin-top: 5vh;
+}
 .signup-link {
   text-align: center;
-  margin-top: 1.5rem;
-  color: #666;
+  margin-top: 20px;
 }
 
 .signup-link a {
-  color: #8d6e63;
-  font-weight: 600;
-  transition: color 0.3s ease;
+  color: #602E1A;
 }
 
-.signup-link a:hover {
-  color: #5d4037;
+.social-media{
+  margin-top: 30px;
 }
 
-.login-image {
-    height: 80%;
-}
-
-.login-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 1rem;
-}
-
-/* Media Queries for Responsive Design */
-@media (min-width: 768px) {
+/* Responsive adjustments (example) */
+@media (max-width: 768px) {
   .login-wrapper {
-    grid-template-columns: 1fr 1fr;
+    flex-direction: column; /* Stack form and image vertically */
+    width: 90%;
   }
-
   .login-image {
-    display: block;
+    order: -1; /* Place image above form on smaller screens */
   }
-}
-
-@media (max-width: 767px) {
   .login-form-container {
-    padding: 1.5rem;
-  }
-
-  .login-form-container h1 {
-    font-size: 2rem;
+    padding: 20px;
   }
 }
