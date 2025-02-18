@@ -1,0 +1,109 @@
+.footer {
+    background-color: #BD8E7B;
+    padding: 20px;
+    font-family: josefin sans;
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-top: -145px;
+    margin-right: 5px;
+}
+
+.footer-content1 {
+    color: #472313;
+    font-weight: 500;
+    font-size: 17px;
+    width: 40vh;
+}
+
+.footer-section1 {
+    margin-top: 50px;
+}
+
+.footer-section h3 {
+    color: #472313;
+    margin-bottom: 10px;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    line-height: 2; 
+}
+
+.footer-section li {
+    margin-bottom: 5px;
+}
+
+.footer-section a {
+    text-decoration: none;
+    transition: color 0.3s ease;
+    color: #472313;
+}
+
+.footer-section a:hover {
+    color: #ffffff;
+}
+
+.social-icons,
+.payment-icons {
+    display: flex;
+}
+
+.social-icon,
+.payment-icon {
+    margin-right: 10px;
+}
+
+.social-icon img,
+.payment-icon img {
+    width: 24px;
+    height: 24px;
+}
+
+.footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    border-top: 1px solid #472313; /* Use '1px' for border thickness */
+    margin-top: 20px; /* Added margin for spacing */
+}
+
+.footer-bottom p {
+    margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .footer-section {
+        width: calc(50% - 20px); /* Two sections per row on medium screens */
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        align-items: center; /* Center items on smaller screens */
+        text-align: center; /* Center text within footer-bottom */
+    }
+
+    .footer-bottom p {
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 500px) {
+    .footer-section {
+        width: 100%; /* One section per row on small screens */
+    }
+
+    .footer-content {
+        flex-direction: column; /* Stack sections vertically */
+        align-items: center; /* Center sections horizontally */
+    }
+}

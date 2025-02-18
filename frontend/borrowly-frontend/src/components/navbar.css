@@ -19,15 +19,17 @@
 }
 
 .nav-links button {
-  background-color: #572e0f;
-  color: white;
+  background-color: #BD8E7B;
+  color:#472313;
   padding: 10px;
   border: none;
   cursor: pointer;
   margin: 0 10px;
-  font-size: 16px;
+  font-size:20px;
+  font-weight: 600;
 }
 
 .nav-links button:hover {
-  background-color: #9e642a;
+  color:white;
+  background-color: #BD8E7B;
 }

@@ -7,6 +7,7 @@ import Signup from "./components/signup";
 import LandingPage from "./components/landingPage";
 import Rent from "./components/rent";
 import Borrow from "./components/borrow";
+import Footer from "./components/footer";
 
 
 const App = () => {
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="/landingPage" element={<LandingPage />} />
         <Route path="/rent" element={<Rent />} />
         <Route path="/borrow" element={<Borrow />} />
+        <Route path="/footer" element={<Footer />} />
       </Routes>
     </Router>
   );

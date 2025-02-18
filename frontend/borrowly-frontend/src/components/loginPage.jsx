@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
 import '../components/loginPage.css';
 import login from '../assets/login.png';
 
@@ -11,6 +12,7 @@ const Login = () => {
     rememberMe: false
   });
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);  
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -25,29 +27,20 @@ const Login = () => {
     setLoading(true);
 
     try {
-      // Send login request to your backend using fetch
       const response = await fetch('https://borrowly.onrender.com/login', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
       });
 
       if (response.ok) {
         const data = await response.json();
-
-        // Handle success (you can store the token in localStorage or cookies if using JWT)
-        localStorage.setItem('token', data.token); // If using JWT or a token
-
-        // Redirect to the dashboard (or another page after successful login)
-        navigate('/landingPage'); 
+        localStorage.setItem('token', data.token);  // Store token if using JWT
+        navigate('/landingPage');
       } else {
-        // Handle error if login fails
-        alert('Login failed. Please check your credentials. Or register first.');
+        alert('Login failed. Please check your credentials or register first.');
       }
     } catch (error) {
-      // Handle any unexpected errors
       alert('An error occurred. Please try again.');
       console.error('Login error:', error);
     } finally {
@@ -58,9 +51,10 @@ const Login = () => {
   return (
     <div className="login-container">
       <div className="login-wrapper">
-        {/* Left side - Form */}
+        
+        
         <div className="login-form-container">
-          <h1>WELCOME!</h1>
+          <h1>WELCOME !</h1>
 
           <form onSubmit={handleSubmit}>
             <div className="form-group">
@@ -76,17 +70,20 @@ const Login = () => {
               </div>
             </div>
 
+           
             <div className="form-group">
               <div className="input-wrapper">
-            
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"} 
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
                   placeholder="Password"
                   required
                 />
+                <span className="eye-icon" onClick={() => setShowPassword(!showPassword)}>
+                  {showPassword ? <FiEye /> : <FiEyeOff />}
+                </span>
               </div>
             </div>
 
@@ -105,35 +102,22 @@ const Login = () => {
               </Link>
             </div>
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="login-button"
-            >
-              {loading ? (
-                'Loading...'
-              ) : (
-                <>
-                
-                  <span>Login</span>
-                </>
-              )}
+            <button type="submit" disabled={loading} className="login-button">
+              {loading ? 'Loading...' : 'Login'}
             </button>
           </form>
 
+          <div className="line1"></div>
+
+          <div className="social-media">Google & Facebook option</div>
+
           <div className="signup-link">
-            <p>
-              Not a member yet?{' '}
-              <Link to="/signup">
-                Signup
-              </Link>
-            </p>
+            <p>Not a member yet? <Link to="/signup">Signup</Link></p>
           </div>
         </div>
 
-        {/* Right side - Image */}
         <div className="login-image">
-          <img src={login} alt="Login"/>
+          <img src={login} alt="Login" />
         </div>
       </div>
     </div>
