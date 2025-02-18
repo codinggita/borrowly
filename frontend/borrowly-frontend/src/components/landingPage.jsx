@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './navbar.jsx';
 import Footer from './footer.jsx';
-import './LandingPage.css';
+import './landingPage.css';
 import landing1 from '../assets/landing1.png';
 import landing2 from '../assets/landing2.png';
 import landing3 from '../assets/landing3.png';
