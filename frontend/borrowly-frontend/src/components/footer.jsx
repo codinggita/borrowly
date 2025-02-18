@@ -1,5 +1,5 @@
 import React from 'react';
-import './Footer.css';
+import './footer.css';
 import payment1 from '../assets/payment1.png';
 import payment2 from '../assets/payment2.png';
 import payment3 from '../assets/payment3.png';
