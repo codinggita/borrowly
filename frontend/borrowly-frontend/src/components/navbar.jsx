@@ -1,7 +1,7 @@
 import React from 'react';
 import './navbar.css';
 import { Link } from 'react-router-dom';
-import logo1 from './src/assets/logo.png';
+import logo1 from '../assets/logo.png';
 
 function Navbar() {
   const handleNavigation = (page) => {
