@@ -1,6 +1,7 @@
 import React from 'react';
-import './Navbar.css';
+import './navbar.css';
 import { Link } from 'react-router-dom';
+import logo1 from '../assets/logo.png';
 
 function Navbar() {
   const handleNavigation = (page) => {
@@ -10,7 +11,7 @@ function Navbar() {
   return (
     <div className="navbar">
       <Link to="/landingPage">
-      <div className="logo1"><img src='./src/assets/logo.png'/></div>
+      <div className="logo1"><img src={logo1}/></div>
       </Link>
       <div className="nav-links">
         <button onClick={() => handleNavigation('rent')}>RENT</button>
