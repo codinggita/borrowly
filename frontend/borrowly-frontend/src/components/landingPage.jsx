@@ -6,6 +6,7 @@ import landing1 from '../assets/landing1.png';
 import landing2 from '../assets/landing2.png';
 import landing3 from '../assets/landing3.png';
 import landing4 from '../assets/landing4.png';
+import ProductCard from './productCard.jsx';
 
 function LandingPage() {
   const [topRented, setTopRented] = useState([]);
@@ -14,11 +15,11 @@ function LandingPage() {
   const images = [landing1, landing2, landing3, landing4];
 
   useEffect(() => {
-    fetch('https://borrowly.onrender.com/mixture')
+    fetch('https://borrowly-backend.onrender.com/mixture')
       .then((response) => response.json())
       .then((data) => {
         const shuffledData = data.sort(() => Math.random() - 0.5);
-        setTopRented(shuffledData.slice(0, 6));
+        setTopRented(shuffledData.slice(0, 8));
       })
       .catch((error) => console.error('Error fetching data:', error));
   }, []);
@@ -32,9 +33,9 @@ function LandingPage() {
     return () => clearInterval(interval);
   }, []);
 
-  const handleNavigation = (page) => {
-    window.location.href = `/${page}`;
-  };
+  // const handleNavigation = (page) => {
+  //   window.location.href = /${page};
+  // };
 
   return (
     <div>
@@ -52,28 +53,17 @@ function LandingPage() {
         <h1><u>TOP RENTED THIS MONTH</u></h1>
         <div className="items-container">
           {topRented.map((item, index) => (
-            <div key={index} className="item-card">
-
-              <div className='prod_img_main'>
-                <img src={item.images[0]} alt={item.prodName} />
-                <div className='prod_img'>
-                  <img src={item.images[1]} alt={item.prodName} />
-                  <img src={item.images[2]} alt={item.prodName} />
-                </div>
-              </div>
-
-              <div className='item-name'>{item.prodName}</div>
-              <div className="brand-name">{item.brand}</div>
-              <div className="price-container">
-                <span className="price">{item.price}</span>
-              </div>
-
-              <div className='buttons'>
-                <button className="wishlist-button">Wishlist</button>
-                <button className="add-to-bag-button" onClick={() => handleNavigation('cart')}>Add to Cart</button>
-              </div>
-
-            </div>
+            <ProductCard
+              key={index}
+              id={item._id}
+              name={item.prodName}
+              brand={item.brand}
+              price={item.price}
+              rating={item.rating || 4.5}
+              reviews={item.reviews || 100}
+              image={item.images[0]}
+              product={item}
+            />
           ))}
         </div>
       </div>

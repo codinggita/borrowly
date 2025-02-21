@@ -1,7 +1,11 @@
 .landing-page {
   padding: 20px;
-  text-align: center;
   font-family: josefin sans;
+}
+
+.landing-page h1 {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .carousel {
@@ -28,112 +32,12 @@
   padding: 20px;
 }
 
-
-
-/* Responsive styles for filter buttons */
-@media (max-width: 600px) {
-  .filter-options {
-      flex-direction: column;
-      align-items: center;
-  }
-
-  .filter-button {
-      width: 100%;
-      margin-bottom: 10px;
-  }
-}
-
-
 /* Styles for the "Top Rented" section */
 .items-container {
   display: grid;
-  justify-content: center;
-  align-items: center;
-  grid-template-columns: repeat(3,1fr); 
+  grid-template-columns: repeat(4,1fr); 
   gap: 50px;
   margin-top: 30px;
-  margin-left: 60px;
-  
-}
-
-.item-card {
-  width: 90%; 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  border: 1px solid #572e0f;
-  border-radius: 5px;
-}
-
-
-.item-card img {
-  width:220px;
-  height:250px;
-  border-radius:10px;
-  object-fit:fill;
-  margin-bottom: 10px;
-}
-
-.prod_img_main{
-  display: flex;
-}
-
-.prod_img{
-  display: flex;
-  flex-direction: column;
-}
-
-.prod_img img{
-  width:120px;
-  height:120px;
-  margin-left:10px;
-  object-fit:fill;
-}
-
-.brand-name {
-  color:#572e0f;
-  margin-bottom: 5px;
-  font-weight: 500;
-  font-size: larger;
-}
-
-.item-name{
-  color:#572e0f;
-  margin-bottom: 5px;
-  font-weight: 600;
-  font-size: larger;
-}
-
-.price-container {
-  margin-bottom: 10px;
-}
-
-.price {
-  font-weight: bold;
-  font-size: 20px;
-  color: #572e0f;
-}
-
-
-.wishlist-button,
-.add-to-bag-button {
-  background-color: #744d3d;
-  color: white;
-  padding: 8px 16px;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  font-size: 15px;
-  transition: background-color 0.3s ease; 
-  margin: 5px;
-}
-
-.wishlist-button:hover,
-.add-to-bag-button:hover {
-  background-color: #572e0f;
-  color: white;
 }
 
 
@@ -147,5 +51,18 @@
 @media (max-width: 480px) {
   .items-container {
       grid-template-columns: 1fr; /* 1 column on small screens */
+  }
+}
+
+/* Responsive styles for filter buttons */
+@media (max-width: 600px) {
+  .filter-options {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .filter-button {
+      width: 100%;
+      margin-bottom: 10px;
   }
 }
