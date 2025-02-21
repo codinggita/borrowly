@@ -50,7 +50,7 @@ const Signup = () => {
     setError('');
     setPasswordError('');
 
-    fetch('https://borrowly.onrender.com/register', {
+    fetch('https://borrowly-backend.onrender.com/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -94,7 +94,7 @@ const Signup = () => {
           {error && <div className="error-message">{error}</div>}
           
           <form onSubmit={handleSubmit}>
-            <div className="form-group">
+            <div className="form-group1">
               <div className="input-wrapper">
                 <input
                   type="text"
@@ -107,7 +107,7 @@ const Signup = () => {
               </div>
             </div>
 
-            <div className="form-group">
+            <div className="form-group1">
               <div className="input-wrapper">
                 <input
                   type="text"
@@ -120,7 +120,7 @@ const Signup = () => {
               </div>
             </div>
 
-            <div className="form-group">
+            <div className="form-group1">
               <div className="input-wrapper">
                 <input
                   type={showPassword ? "text" : "password"}
@@ -136,7 +136,7 @@ const Signup = () => {
               </div>
             </div>
 
-            <div className="form-group">
+            <div className="form-group1">
               <div className="input-wrapper">
                 <input
                   type={showConfirmPassword ? "text" : "password"}
