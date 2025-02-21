@@ -4,4 +4,5 @@ body{
   overflow-x: hidden;
   background-color: #E3CBB3;
   font-family: 'Josefin Sans';
+  word-spacing: 1px;
 }
