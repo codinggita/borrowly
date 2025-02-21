@@ -27,7 +27,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const response = await fetch('https://borrowly.onrender.com/login', {
+      const response = await fetch('https://borrowly-backend.onrender.com/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
@@ -57,7 +57,7 @@ const Login = () => {
           <h1>WELCOME !</h1>
 
           <form onSubmit={handleSubmit}>
-            <div className="form-group">
+            <div className="form-group1">
               <div className="input-wrapper">
                 <input
                   type="text"
@@ -71,7 +71,7 @@ const Login = () => {
             </div>
 
            
-            <div className="form-group">
+            <div className="form-group1">
               <div className="input-wrapper">
                 <input
                   type={showPassword ? "text" : "password"} 

@@ -41,7 +41,7 @@
   color: #602E1A;
 }
 
-.form-group {
+.form-group1 {
   margin-bottom: 20px;
 }
 
@@ -88,15 +88,17 @@ input:focus {
 }
 
 .login-button {
-  width: 100%;
+  width: 40%;
   padding: 12px;
   background-color: #602E1A;
+  color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s ease; 
-  margin-left: 9em;
+  margin-left: 8rem;
+  margin-top: 1rem;
 }
 
 .login-button:hover {
@@ -125,6 +127,28 @@ input:focus {
 
 .social-media{
   margin-top: 30px;
+}
+
+.input-wrapper input[type="text"],
+input[type="number"],
+input[type="tel"],
+input[type="email"],
+select,
+textarea {
+  padding: 0.75rem;
+  border: 1px solid #572e0f;
+  background-color: #E3CBB3;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.input-wrapper input:focus,
+select:focus,
+textarea:focus {
+  border-color: #572e0f;
+  background-color: #E3CBB3;
+  outline: none;
 }
 
 /* Responsive adjustments (example) */
