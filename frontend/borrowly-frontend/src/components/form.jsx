@@ -85,10 +85,13 @@ const Form = ({ isOpen, onClose }) => {
         }
     };
 
+    const [loading, setLoading] = useState(false);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
         try {
-            const response = await fetch('https://borrowly.onrender.com/submit-form', {
+            const response = await fetch('https://borrowly-backend.onrender.com/submit-form', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
@@ -145,7 +148,7 @@ const Form = ({ isOpen, onClose }) => {
                             <label>Category</label>
                             <select name="category" value={formData.category} onChange={handleChange} required>
                                 <option value="">Select Category</option>
-                                <option value="Clothed">Clothes</option>
+                                <option value="Clothes">Clothes</option>
                                 <option value="Footwears">Footwears</option>
                                 <option value="Accessories">Accessories</option>
                             </select>
@@ -195,7 +198,7 @@ const Form = ({ isOpen, onClose }) => {
                                                 size: prevData.size.filter((s) => s !== size), // Remove deselected size
                                             }));
                                         }
-                                    }} required />
+                                    }} />
                                     {size}
                                 </label>
                             ))}
@@ -310,7 +313,10 @@ const Form = ({ isOpen, onClose }) => {
                     </div>
 
                     <div className="form-footer">
-                        <button type="submit" className="submit-button">Submit Form</button>
+                        {/* <button type="submit" className="submit-button">Submit Form</button> */}
+                        <button type="submit" disabled={loading} className="submit-button">
+                            {loading ? 'Submiting...' : 'Submit Form'}
+                        </button>
                     </div>
                 </form>
 
