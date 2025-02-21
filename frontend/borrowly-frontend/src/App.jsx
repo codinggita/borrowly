@@ -9,6 +9,8 @@ import Rent from "./components/rent";
 import Borrow from "./components/borrow";
 import Footer from "./components/footer";
 import Form from "./components/form";
+import ProductDetails from "./components/productDetails";
+import ProductCard from "./components/productCard";
 
 
 const App = () => {
@@ -24,6 +26,8 @@ const App = () => {
         <Route path="/borrow" element={<Borrow />} />
         <Route path="/footer" element={<Footer />} />
         <Route path="/form" element={<Form />} />
+        <Route path="/product/:id" element={<ProductDetails />} />
+        <Route path="/productCard" element={<ProductCard />} />
       </Routes>
     </Router>
   );
