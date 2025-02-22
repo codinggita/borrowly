@@ -8,6 +8,49 @@ function ProductCard({ name, brand, price, rating, reviews, image, id, product }
     const handleClick = () => {
         navigate(`/product/${id}`, { state: { product } });
     };
+    const addToCart = async () => {
+        const userId = localStorage.getItem("userId"); // Retrieve user ID
+        if (!userId) {
+            alert("User not logged in");
+            return;
+        }
+    
+        try {
+            const response = await fetch("https://borrowly-backend.onrender.com/cart/add", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ userId, productId: id })
+            });
+    
+            const data = await response.json();
+            alert(data.message); // Show alert based on response
+        } catch (error) {
+            console.error("Error adding to cart:", error);
+        }
+    };
+    
+    const addToWishlist = async () => {
+        const userId = localStorage.getItem("userId"); // Retrieve user ID
+        if (!userId) {
+            alert("User not logged in");
+            return;
+        }
+    
+        try {
+            const response = await fetch("https://borrowly-backend.onrender.com/wishlist/add", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ userId, productId: product._id })
+            });
+    
+            const data = await response.json();
+            alert(data.message); // Show alert based on response
+        } catch (error) {
+            console.error("Error adding to wishlist:", error);
+        }
+    };
+    
+    
     const renderStars = () => {
         const stars = [];
         const fullStars = Math.floor(rating);
@@ -30,8 +73,8 @@ function ProductCard({ name, brand, price, rating, reviews, image, id, product }
     };
 
     return (
-        <div className="product-card" onClick={handleClick} style={{ cursor: "pointer" }}>
-            <div className="product-image-container">
+        <div className="product-card">
+            <div className="product-image-container" onClick={handleClick} style={{ cursor: "pointer" }}>
 
                 <img src={image} alt={name} className="product-image" />
             </div>
@@ -44,10 +87,10 @@ function ProductCard({ name, brand, price, rating, reviews, image, id, product }
                 </div>
                 <div className="product-price">Rs.{price}/per day</div>
                 <div className="product-buttons">
-                    <button className="wishlist-btn">
+                    <button className="wishlist-btn" onClick={addToWishlist}>
                         ♡ Wishlist
                     </button>
-                    <button className="cart-btn">
+                    <button className="cart-btn" onClick={addToCart}>
                         🛒 Add to Cart
                     </button>
                 </div>

@@ -23,6 +23,51 @@ function ProductDetails() {
 
   if (!product) return <h1>Loading...</h1>;
 
+  // Function to add product to wishlist
+  const addToWishlist = async () => {
+    const userId = localStorage.getItem("userId");
+    console.log(`The user id is :${userId}`)
+    if (!userId) {
+      alert("Please log in to add to wishlist");
+      return;
+    }
+
+    try {
+      const response = await fetch("https://borrowly-backend.onrender.com/wishlist/add", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId, productId: id }),
+      });
+
+      const data = await response.json();
+      alert(data.message);
+    } catch (error) {
+      console.error("Error adding to wishlist:", error);
+    }
+  };
+
+  // Function to add product to cart
+  const addToCart = async () => {
+    const userId = localStorage.getItem("userId");
+    if (!userId) {
+      alert("Please log in to add to cart");
+      return;
+    }
+
+    try {
+      const response = await fetch("https://borrowly-backend.onrender.com/cart/add", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId, productId: id }),
+      });
+
+      const data = await response.json();
+      alert(data.message);
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+    }
+  };
+
   return (
     <div>
       <Navbar />
@@ -95,18 +140,11 @@ function ProductDetails() {
           </div>
 
           <div className="product-buttons">
-            <button className="wishlist-btn">
-              ♡ Wishlist
-            </button>
-            <button className="cart-btn">
-              🛒 Add to Cart
-            </button>
+            <button className="wishlist-btn" onClick={addToWishlist}> ♡ Wishlist </button>
+            <button className="cart-btn" onClick={addToCart}>🛒 Add to Cart</button>
           </div>
         </div>
       </div>
-
-
-
       <Footer />
     </div>
   );

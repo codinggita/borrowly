@@ -35,15 +35,13 @@ const Login = () => {
 
       if (response.ok) {
         const data = await response.json();
-        // Store username in localStorage
-      localStorage.setItem('username', formData.username);
-      localStorage.setItem('token', data.token);  // Store token if using JWT
-
-      // Dispatch an event to notify other components
-      window.dispatchEvent(new Event("storage"));
-
-      navigate('/landingPage');
-    } else {
+        localStorage.setItem('token', data.token);  // Store token if using JWT
+        localStorage.setItem('userId', data.user._id);
+        localStorage.setItem('username', data.user.username); 
+        // console.log(data.user._id)
+        // console.log(data.user.username)
+        navigate('/landingPage');
+      } else {
         alert('Login failed. Please check your credentials or register first.');
       }
     } catch (error) {
