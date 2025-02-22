@@ -35,9 +35,15 @@ const Login = () => {
 
       if (response.ok) {
         const data = await response.json();
-        localStorage.setItem('token', data.token);  // Store token if using JWT
-        navigate('/landingPage');
-      } else {
+        // Store username in localStorage
+      localStorage.setItem('username', formData.username);
+      localStorage.setItem('token', data.token);  // Store token if using JWT
+
+      // Dispatch an event to notify other components
+      window.dispatchEvent(new Event("storage"));
+
+      navigate('/landingPage');
+    } else {
         alert('Login failed. Please check your credentials or register first.');
       }
     } catch (error) {
