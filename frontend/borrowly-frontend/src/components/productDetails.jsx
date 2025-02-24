@@ -10,6 +10,8 @@ function ProductDetails() {
   const navigate = useNavigate();
 
   const [product, setProduct] = useState(location.state?.product || null);
+  const [wishlistLoading, setWishlistLoading] = useState(false);
+  const [cartLoading, setCartLoading] = useState(false);
 
   // Fetch data if not available in state
   useEffect(() => {
@@ -32,6 +34,8 @@ function ProductDetails() {
       return;
     }
 
+    setWishlistLoading(true);
+
     try {
       const response = await fetch("https://borrowly-backend.onrender.com/wishlist/add", {
         method: "POST",
@@ -41,8 +45,18 @@ function ProductDetails() {
 
       const data = await response.json();
       alert(data.message);
+
+      let wishlistItems = JSON.parse(localStorage.getItem('wishlist')) || [];
+      wishlistItems.push(product);
+      localStorage.setItem('wishlist', JSON.stringify(wishlistItems));
+
+      // Dispatch storage event to update navbar count
+      window.dispatchEvent(new Event("storage"));
+
     } catch (error) {
       console.error("Error adding to wishlist:", error);
+    } finally {
+      setWishlistLoading(false);
     }
   };
 
@@ -54,6 +68,8 @@ function ProductDetails() {
       return;
     }
 
+    setCartLoading(true);
+
     try {
       const response = await fetch("https://borrowly-backend.onrender.com/cart/add", {
         method: "POST",
@@ -63,8 +79,61 @@ function ProductDetails() {
 
       const data = await response.json();
       alert(data.message);
+
+      let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+      cartItems.push(product);
+      localStorage.setItem('cart', JSON.stringify(cartItems));
+
+      // Dispatch storage event to update navbar count
+      window.dispatchEvent(new Event("storage"));
+
     } catch (error) {
       console.error("Error adding to cart:", error);
+    } finally {
+      setCartLoading(false);
+    }
+  };
+
+
+  // to remove from cart
+  const handleRemoveFromCart = async () => {
+    try {
+      const response = await fetch("https://borrowly-backend.onrender.com/cart/remove", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId, productId: product._id }),
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        setIsInCart(false);
+        alert("Removed from Cart");
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error("Error removing from cart:", error);
+    }
+  };
+
+  // to remove from wishlist
+  const handleRemoveFromWishlist = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/wishlist/remove", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId, productId: product._id }),
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        setIsInWishlist(false);
+        alert("Removed from Wishlist");
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error("Error removing from wishlist:", error);
     }
   };
 
@@ -76,10 +145,10 @@ function ProductDetails() {
         <button className="back-button" onClick={() => navigate(-1)}>X</button>
 
         <div className="image-section">
-          <img src={product.images.img1} alt={product.prodName} className="main-image" />
+          <img src={product.images.img1||product.images} alt={product.prodName} className="main-image" />
           <div className="small-images">
-            <img src={product.images.img2} alt={product.prodName} />
-            <img src={product.images.img3} alt={product.prodName} />
+            <img src={product.images.img2||product.images} alt={product.prodName} />
+            <img src={product.images.img3||product.images} alt={product.prodName} />
           </div>
         </div>
 
@@ -140,8 +209,12 @@ function ProductDetails() {
           </div>
 
           <div className="product-buttons">
-            <button className="wishlist-btn" onClick={addToWishlist}> ♡ Wishlist </button>
-            <button className="cart-btn" onClick={addToCart}>🛒 Add to Cart</button>
+            <button className="wishlist-btn" onClick={addToWishlist} disabled={wishlistLoading}>
+              {wishlistLoading ? "Adding to Wishlist..." : "♡ Wishlist"}
+            </button>
+            <button className="cart-btn" onClick={addToCart} disabled={cartLoading}>
+              {cartLoading ? "Adding to Cart..." : "🛒 Add to Cart"}
+            </button>
           </div>
         </div>
       </div>
