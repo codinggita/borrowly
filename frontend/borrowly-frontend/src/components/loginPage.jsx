@@ -37,9 +37,10 @@ const Login = () => {
         const data = await response.json();
         localStorage.setItem('token', data.token);  // Store token if using JWT
         localStorage.setItem('userId', data.user._id);
-        localStorage.setItem('username', data.user.username); 
-        // console.log(data.user._id)
-        // console.log(data.user.username)
+        localStorage.setItem('username', data.user.username);
+        localStorage.setItem('cart', JSON.stringify(data.user.cart || []));
+        localStorage.setItem('wishlist', JSON.stringify(data.user.wishlist || [])); 
+
         navigate('/landingPage');
       } else {
         alert('Login failed. Please check your credentials or register first.');
