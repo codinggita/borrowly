@@ -9,6 +9,8 @@ import mixtureRoutes from "./product/mixture.js";
 import userRoutes from "./product/signup.js";
 import loginRoutes from "./product/login.js";
 import formRoutes from "./product/form.js";
+import cartRoutes from "./product/cart.js";
+import wishlistRoutes from "./product/wishlist.js";
 
 
 dotenv.config();
@@ -28,6 +30,8 @@ app.use('/mixture',mixtureRoutes)
 app.use('/',userRoutes) //post route for signup
 app.use('/', loginRoutes); //post route for login
 app.use('/', formRoutes);
+app.use('/cart',cartRoutes);
+app.use('/wishlist',wishlistRoutes);
 
 const uri = 'mongodb+srv://isha:ishapatel@cluster0.2dsxv.mongodb.net/';
  // Local MongoDB URI

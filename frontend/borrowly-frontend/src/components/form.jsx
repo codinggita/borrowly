@@ -52,37 +52,43 @@ const Form = ({ isOpen, onClose }) => {
     };
 
     const handleImageUpload = async (e, imageKey) => {
+        // console.log("img upload in progress");
         const file = e.target.files[0];
-        if (file) {
-            const uploadPreset = 'YOUR_UPLOAD_PRESET';
-            const cloudName = 'dppoujdl9';
-            const url = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
+        if (!file) return;
 
-            const formData = new FormData();
-            formData.append('file', file);
-            formData.append('upload_preset', uploadPreset);
+        const uploadPreset = 'YOUR_UPLOAD_PRESET';
+        const cloudName = 'dppoujdl9';
+        const url = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
 
-            try {
-                const response = await fetch(url, {
-                    method: 'POST',
-                    body: formData,
-                });
-                const data = await response.json();
-                if (data.secure_url) {
-                    setFormData((prevData) => ({
-                        ...prevData,
-                        images: {
-                            ...prevData.images,
-                            [imageKey]: data.secure_url,
-                        },
-                    }));
-                } else {
-                    alert('Error uploading image');
-                }
-            } catch (error) {
-                console.error('Image upload failed:', error);
+        const imageData = new FormData();
+        imageData.append('file', file);
+        imageData.append('upload_preset', uploadPreset);
+
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                body: imageData,
+            });
+            const data = await response.json();
+            // console.log("img url: ", data.secure_url);
+            if (data.secure_url) {
+                setFormData((prevData) => ({
+                    ...prevData,
+                    images: {
+                        ...prevData.images,
+                        [imageKey]: data.secure_url,
+                    },
+                }));
+                // console.log("Image uploaded successfully:", data.secure_url);
+                // console.log("form data:", formData)
+            } else {
+                alert('Error uploading image');
             }
+        } catch (error) {
+            console.error('Image upload failed:', error);
+            alert(`Upload failed: ${error.message}`);
         }
+
     };
 
     const [loading, setLoading] = useState(false);
@@ -90,6 +96,7 @@ const Form = ({ isOpen, onClose }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
+        // console.log("handle")
         try {
             const response = await fetch('https://borrowly-backend.onrender.com/submit-form', {
                 method: 'POST',
@@ -132,7 +139,7 @@ const Form = ({ isOpen, onClose }) => {
                         <div className="image-upload-grid">
                             {[1, 2, 3].map((num) => (
                                 <div key={num} className="upload-box">
-                                    <input type="file" onChange={(e) => handleImageUpload(e, `img${index + 1}`)} required />
+                                    <input type="file" onChange={(e) => handleImageUpload(e, `img${num}`)} required/>
                                 </div>
                             ))}
                         </div>
@@ -157,7 +164,7 @@ const Form = ({ isOpen, onClose }) => {
                         <div className="form-group">
                             <div className="form-group">
                                 <label>Sub-Category</label>
-                                <input type="text" name="subCategory" value={formData.subCategory} onChange={handleChange} required />
+                                <input type="text" name="subCategory" value={formData.subCategory} onChange={handleChange} required/>
                             </div>
                         </div>
 
@@ -208,7 +215,7 @@ const Form = ({ isOpen, onClose }) => {
                     <div className="form-grid">
                         <div className="form-group">
                             <label>Material</label>
-                            <input type="text" name="material" value={formData.material} onChange={handleChange} />
+                            <input type="text" name="material" value={formData.material} onChange={handleChange} required />
                         </div>
 
                         <div className="form-group">
@@ -223,7 +230,7 @@ const Form = ({ isOpen, onClose }) => {
 
                         <div className="form-group">
                             <label>Price per Day (₹)</label>
-                            <input type="number" name="price" value={formData.price} onChange={handleChange} required />
+                            <input type="number" name="price" value={formData.price} onChange={handleChange} required/>
                         </div>
                     </div>
 
@@ -239,7 +246,7 @@ const Form = ({ isOpen, onClose }) => {
                                                 const newDurations = [...formData.duration];
                                                 newDurations[index] = e.target.value;
                                                 setFormData({ ...formData, duration: newDurations });
-                                            }} required={index < 2} />
+                                            }} required={index < 2}/>
                                     </div>
                                 ))}
                             </div>
@@ -248,23 +255,23 @@ const Form = ({ isOpen, onClose }) => {
 
                     <div className="form-group">
                         <label>Deposit Amount (₹)</label>
-                        <input type="number" name="deposit" value={formData.deposit} onChange={handleChange} required />
+                        <input type="number" name="deposit" value={formData.deposit} onChange={handleChange} required/>
                     </div>
 
                     <div className="form-group">
                         <label>Product Description</label>
-                        <textarea rows="4" name="description" value={formData.description} onChange={handleChange}></textarea>
+                        <textarea rows="4" name="description" value={formData.description} onChange={handleChange} required></textarea>
                     </div>
 
                     <div className="form-group">
                         <label>Terms and Conditions</label>
-                        <textarea rows="4" name="termsAndConditions" value={formData.termsAndConditions} onChange={handleChange}></textarea>
+                        <textarea rows="4" name="termsAndConditions" value={formData.termsAndConditions} onChange={handleChange} required></textarea>
                     </div>
 
                     <div className="form-grid">
                         <div className="form-group">
                             <label>Delivery Time (days)</label>
-                            <input type="number" name="deliveryTime" value={formData.deliveryTime} onChange={handleChange} required />
+                            <input type="number" name="deliveryTime" value={formData.deliveryTime} onChange={handleChange} required/>
                         </div>
 
                         <div className="form-group">
@@ -282,12 +289,12 @@ const Form = ({ isOpen, onClose }) => {
                         <div className="form-grid">
                             <div className="form-group">
                                 <label>Full Name</label>
-                                <input type="text" name="renter.name" value={formData.renter.name} onChange={handleChange} required />
+                                <input type="text" name="renter.name" value={formData.renter.name} onChange={handleChange} required/>
                             </div>
 
                             <div className="form-group">
                                 <label>Phone Number</label>
-                                <input type="tel" name="renter.phnNum" value={formData.renter.phnNum} onChange={handleChange} required />
+                                <input type="tel" name="renter.phnNum" value={formData.renter.phnNum} onChange={handleChange} required/>
                             </div>
 
                             <div className="form-group">
@@ -315,7 +322,7 @@ const Form = ({ isOpen, onClose }) => {
                     <div className="form-footer">
                         {/* <button type="submit" className="submit-button">Submit Form</button> */}
                         <button type="submit" disabled={loading} className="submit-button">
-                            {loading ? 'Submiting...' : 'Submit Form'}
+                            {loading ? 'Submitting...' : 'Submit Form'}
                         </button>
                     </div>
                 </form>

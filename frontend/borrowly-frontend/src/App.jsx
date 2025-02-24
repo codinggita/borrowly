@@ -11,6 +11,8 @@ import Footer from "./components/footer";
 import Form from "./components/form";
 import ProductDetails from "./components/productDetails";
 import ProductCard from "./components/productCard";
+import Cart from "./components/cart";
+import Wishlist from "./components/wishlist";
 
 
 const App = () => {
@@ -28,6 +30,8 @@ const App = () => {
         <Route path="/form" element={<Form />} />
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/productCard" element={<ProductCard />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/wishlist" element={<Wishlist />} />
       </Routes>
     </Router>
   );

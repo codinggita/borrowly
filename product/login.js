@@ -24,16 +24,23 @@ loginRoutes.post('/login', async (req, res) => {
         // Find user by username
         const user = await usersCollection.findOne({ username });
 
+        console.log(user)
+
         if (!user) {
+            client.close();
             return res.status(401).json({ message: "User not found. Please register first." });
         }
 
         // Check if password matches
         if (user.password !== password) {
+            client.close();
             return res.status(401).json({ message: "Invalid password" });
         }
 
-        res.status(200).json({ message: "Login successful", user });
+        res.status(200).json({ 
+            message: "Login successful", 
+            user: { username: user.username, cart:user.cart, wishlist:user.wishlist} 
+        });
 
         client.close();
     } catch (err) {
