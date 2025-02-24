@@ -38,7 +38,6 @@ wishlistRoutes.post("/add", async (req, res) => {
         res.json({ success: true, message: "Added to Wishlist" });
         client.close();
     } catch (error) {
-        console.log(error)
         res.status(500).json({ message: "Server error", error });
     }
 });
