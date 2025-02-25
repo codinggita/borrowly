@@ -19,6 +19,7 @@ wishlistRoutes.post("/add", async (req, res) => {
         const client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
         const db = client.db(dbName);
         const usersCollection = db.collection("signup"); // Users collection
+        const productsCollection = db.collection("mixture"); // Product collection
 
         // Check if user exists
         const user = await usersCollection.findOne({ _id: new ObjectId(userId) });
@@ -27,15 +28,25 @@ wishlistRoutes.post("/add", async (req, res) => {
             return res.status(404).json({ message: "User not found" });
         }
 
+        // Fetch product details
+        const product = await productsCollection.findOne({ _id: new ObjectId(productId) });
+        if (!product) {
+            client.close();
+            return res.status(404).json({ message: "Product not found" });
+        }
+
         // Check if product already exists in wishlist
-        if (!user.wishlist.includes(productId)) {
+        const existingWishlist = user.wishlist || [];
+        const alreadyInWishlist = existingWishlist.some(item => item._id.toString() === productId);
+
+        if (!alreadyInWishlist) {
             await usersCollection.updateOne(
                 { _id: new ObjectId(userId) },
-                { $push: { wishlist: productId } }
+                { $push: { wishlist: product } } // Store full product details
             );
         }
 
-        res.json({ success: true, message: "Added to Wishlist" });
+        res.json({ success: true, message: "Added to Wishlist", product });
         client.close();
     } catch (error) {
         res.status(500).json({ message: "Server error", error });
@@ -64,7 +75,7 @@ wishlistRoutes.delete("/remove", async (req, res) => {
         // Remove product from wishlist
         await usersCollection.updateOne(
             { _id: new ObjectId(userId) },
-            { $pull: { wishlist: productId } } // Remove productId from wishlist array
+            { $pull: { wishlist: { _id: new ObjectId(productId) } } } // Remove productId from wishlist array
         );
 
         res.json({ success: true, message: "Removed from Wishlist" });
