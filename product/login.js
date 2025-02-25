@@ -39,7 +39,7 @@ loginRoutes.post('/login', async (req, res) => {
 
         res.status(200).json({ 
             message: "Login successful", 
-            user: { username: user.username, cart:user.cart, wishlist:user.wishlist} 
+            user: {userId: user._id, username: user.username, cart:user.cart, wishlist:user.wishlist} 
         });
 
         client.close();
