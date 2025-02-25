@@ -1,6 +1,6 @@
 .b_img1{
     width: 100%;
-    height: 75vh;
+    height: 78vh;
   }
   
   .b_img2{
@@ -9,4 +9,125 @@
     margin-left: 14.5%;
     margin-top:3rem;
     margin-bottom: 3rem;
+  }
+
+  .container {
+    /* max-width: 1200px; */
+    background-color: #BD8E7B;
+    margin-bottom: 2rem;
+    padding: 0.5rem;
+    min-height: 100vh;
+  }
+  
+  .explore-link {
+    display: block;
+    text-align: center;
+    text-decoration: underline;
+    color: #60211A;
+    text-decoration: none;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    font-family:'josefin sans';
+  }
+  
+  .categories-section {
+    text-align: center;
+  }
+  
+  h1 {
+    color: #4a332f;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    font-family: 'josefin sans';
+  }
+  
+  .subtitle {
+    color: #60211A;
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
+    font-style: italic;
+  }
+  
+  .category {
+    margin-bottom: 4rem;
+  }
+  
+  h2 {
+    color: #60211A;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    font-family: 'josefin sans';
+    text-decoration: underline;
+    text-underline-offset: 8px;
+  }
+  
+  .category-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5rem;
+    margin: 0 auto;
+    max-width: 950px;
+  }
+  
+  .category-card {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .category-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  
+  .category-card:hover img {
+    transform: scale(1.05);
+  }
+  
+  .category-btn {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #5e342e;
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: 'josefin sans';
+    letter-spacing: 1px;
+    border-radius: 4px;
+  }
+  
+  .category-btn:hover {
+    background-color: #60211A;
+  }
+  
+  @media (max-width: 768px) {
+    .category-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  
+    .container {
+      padding: 1rem;
+    }
+  
+    h1 {
+      font-size: 2rem;
+    }
+  
+    h2 {
+      font-size: 1.5rem;
+    }
+  
+    .subtitle {
+      font-size: 1rem;
+    }
   }
