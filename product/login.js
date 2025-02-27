@@ -5,7 +5,7 @@ import { MongoClient } from 'mongodb';
 const loginRoutes = express.Router();
 loginRoutes.use(cors());
 
-const uri = process.env.mongo_uri;
+const uri = 'mongodb+srv://isha:ishapatel@cluster0.2dsxv.mongodb.net/';
 const dbName = 'products';
 
 // POST: Login user
