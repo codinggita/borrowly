@@ -11,6 +11,7 @@ import loginRoutes from "./product/login.js";
 import formRoutes from "./product/form.js";
 import cartRoutes from "./product/cart.js";
 import wishlistRoutes from "./product/wishlist.js";
+import ordersRoutes from "./product/orders.js";
 
 
 dotenv.config();
@@ -32,6 +33,7 @@ app.use('/', loginRoutes); //post route for login
 app.use('/', formRoutes);
 app.use('/cart',cartRoutes);
 app.use('/wishlist',wishlistRoutes);
+app.use('/orders',ordersRoutes)
 
 const uri = 'mongodb+srv://isha:ishapatel@cluster0.2dsxv.mongodb.net/';
  // Local MongoDB URI
