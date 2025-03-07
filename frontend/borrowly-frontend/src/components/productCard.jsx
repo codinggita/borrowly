@@ -104,7 +104,7 @@ function ProductCard({ name, brand, price, rating, reviews, image, id, product }
         <div className="product-card">
             <div className="product-image-container" onClick={handleClick} style={{ cursor: "pointer" }}>
 
-                <img src={product.images.img1||image} alt={name} className="product-image" />
+                <img src={product.images.img1} alt={name} className="product-image" />
             </div>
             <div className="product-info">
                 <h3 className="product-name">{name}</h3>
