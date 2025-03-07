@@ -13,6 +13,7 @@ import ProductDetails from "./components/productDetails";
 import ProductCard from "./components/productCard";
 import Cart from "./components/cart";
 import Wishlist from "./components/wishlist";
+import Checkout from "./components/checkout";
 
 
 const App = () => {
@@ -32,6 +33,7 @@ const App = () => {
         <Route path="/productCard" element={<ProductCard />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="/checkout" element={<Checkout />} />
       </Routes>
     </Router>
   );
