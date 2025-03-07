@@ -145,10 +145,10 @@ function ProductDetails() {
         <button className="back-button" onClick={() => navigate(-1)}>X</button>
 
         <div className="image-section">
-          <img src={product.images.img1||product.images} alt={product.prodName} className="main-image" />
+          <img src={product.images.img1} alt={product.prodName} className="main-image" />
           <div className="small-images">
-            <img src={product.images.img2||product.images} alt={product.prodName} />
-            <img src={product.images.img3||product.images} alt={product.prodName} />
+            <img src={product.images.img2} alt={product.prodName} />
+            <img src={product.images.img3} alt={product.prodName} />
           </div>
         </div>
 
@@ -181,33 +181,19 @@ function ProductDetails() {
               <p><b>Availability:</b> {product.availability}</p>
             </div>
           </div>
-
-          <div className="rent-duration">
-            <h3>Rent Duration:</h3>
-            {product.duration.map((d, index) => (
-              <label key={index}>
-                <input type="radio" name="rentDuration" value={d} /> {d} Days
-              </label>
-            ))}
-          </div>
-
-
           <div className="description">
             <h3>Description:</h3>
             <p>{product.description}</p>
           </div>
-
           <div className="terms">
             <h3>Terms & Conditions:</h3>
             <p>{product.termsAndConditions}</p>
           </div>
-
           <div className="renter-details">
             <h3>Renter Details:</h3>
             <p><b>Name:</b> {product.renter.name}</p>
             <p><b>Phone:</b> {product.renter.phnNum}</p>
           </div>
-
           <div className="product-buttons">
             <button className="wishlist-btn" onClick={addToWishlist} disabled={wishlistLoading}>
               {wishlistLoading ? "Adding to Wishlist..." : "♡ Wishlist"}

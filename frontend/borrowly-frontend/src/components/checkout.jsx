@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import Navbar from './navbar.jsx';
-import Footer from './footer.jsx';
 import './checkout.css';
 
 const Checkout = () => {
@@ -50,7 +48,7 @@ const Checkout = () => {
     };
 
     try {
-      const response = await fetch('http://localhost:8080/orders', {
+      const response = await fetch('https://borrowly-backend.onrender.com/orders', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(orderData),
@@ -75,9 +73,8 @@ const Checkout = () => {
 
   return (
     <div>
-      <Navbar />
       <div className="checkout-container">
-      <button onClick={() => navigate(-1)}>Back</button>
+      <button onClick={() => navigate(-1)}>X</button>
         <h1>Checkout</h1>
         {cartItems.length === 0 ? (
           <p>Your cart is empty.</p>
@@ -85,7 +82,7 @@ const Checkout = () => {
           <div className="checkout-items">
             {cartItems.map(item => (
               <div key={item._id} className="checkout-item">
-                <img src={item.images?.img1||item.images} alt={item.prodName} className="checkout-image" />
+                <img src={item.images?.img1} alt={item.prodName} className="checkout-image" />
                 <div className="checkout-details">
                   <h3>{item.prodName}</h3>
                   <p><b>Price:</b> ₹{item.price}/day</p>
@@ -117,7 +114,6 @@ const Checkout = () => {
           </div>
         )}
       </div>
-      <Footer />
     </div>
   );
 };

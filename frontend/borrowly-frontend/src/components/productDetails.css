@@ -91,23 +91,6 @@
     color: #602E1A;
 }
 
-/* Rent Duration */
-.rent-duration {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
-
-.rent-duration h3{
-    text-decoration: underline;
-    font-size: 1.4rem;
-    color: #602E1A;
-}
-
-.rent-duration label{
-    font-size:1.15rem;
-}
-
 /* Description and Terms */
 .description,
 .terms {

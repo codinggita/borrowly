@@ -11,6 +11,7 @@ import ProductCard from './productCard.jsx';
 function LandingPage() {
   const [topRented, setTopRented] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [loading, setLoading] = useState(true); // Add loading state
 
   const images = [landing1, landing2, landing3, landing4];
 
@@ -20,10 +21,13 @@ function LandingPage() {
       .then((data) => {
         const shuffledData = data.sort(() => Math.random() - 0.5);
         setTopRented(shuffledData.slice(0, 8));
+        setLoading(false); // Set loading to false when data is fetched
       })
-      .catch((error) => console.error('Error fetching data:', error));
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+        setLoading(false); // Ensure loading is set to false even if there's an error
+      });
   }, []);
-
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -51,21 +55,25 @@ function LandingPage() {
 
       <div className="landing-page">
         <h1><u>TOP RENTED THIS MONTH</u></h1>
-        <div className="items-container">
-          {topRented.map((item, index) => (
-            <ProductCard
-              key={index}
-              id={item._id}
-              name={item.prodName}
-              brand={item.brand}
-              price={item.price}
-              rating={item.rating || 4.5}
-              reviews={item.reviews || 100}
-              image={item.images[0]}
-              product={item}
-            />
-          ))}
-        </div>
+        {loading ? (
+          <div className="loader"></div> // Show loader while loading
+        ) : (
+          <div className="items-container">
+            {topRented.map((item, index) => (
+              <ProductCard
+                key={index}
+                id={item._id}
+                name={item.prodName}
+                brand={item.brand}
+                price={item.price}
+                rating={item.rating || 4.5}
+                reviews={item.reviews || 100}
+                image={item.images[0]}
+                product={item}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
       <Footer />
