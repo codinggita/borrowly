@@ -14,6 +14,7 @@ import ProductCard from "./components/productCard";
 import Cart from "./components/cart";
 import Wishlist from "./components/wishlist";
 import Checkout from "./components/checkout";
+import UserProfile from "./components/User";
 
 
 const App = () => {
@@ -34,6 +35,7 @@ const App = () => {
         <Route path="/cart" element={<Cart />} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/user" element={<UserProfile/>}></Route>
       </Routes>
     </Router>
   );
