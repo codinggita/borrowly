@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './checkout.css';
 
@@ -8,6 +8,15 @@ const Checkout = () => {
   const [cartItems, setCartItems] = useState(location.state?.product ? [location.state.product] : JSON.parse(localStorage.getItem('cart')) || []);
   const [selectedDurations, setSelectedDurations] = useState({});
   const [loading, setLoading] = useState(false);
+  const [deliveryInfo, setDeliveryInfo] = useState({
+    fullName: '',
+    address: '',
+    city: '',
+    state: '',
+    zipCode: '',
+    contactNumber: '',
+    preferredDeliveryDate: '',
+  });
 
   const userId = localStorage.getItem('userId');
 
@@ -22,6 +31,11 @@ const Checkout = () => {
     setSelectedDurations(prev => ({ ...prev, [productId]: duration }));
   };
 
+  const handleDeliveryChange = (e) => {
+    const { name, value } = e.target;
+    setDeliveryInfo(prev => ({ ...prev, [name]: value }));
+  };
+
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => {
       const duration = selectedDurations[item._id] || item.duration[0]; // Default to first duration
@@ -32,6 +46,10 @@ const Checkout = () => {
   const handleCheckout = async () => {
     if (!cartItems.length) return alert('Cart is empty.');
     if (Object.keys(selectedDurations).length !== cartItems.length) return alert('Please select duration for all items.');
+    const { fullName, address, city, state, zipCode, contactNumber, preferredDeliveryDate } = deliveryInfo;
+    if (!fullName || !address || !city || !state || !zipCode || !contactNumber || !preferredDeliveryDate) {
+      return alert('Please fill in all delivery details.');
+    }
 
     setLoading(true);
     const orderData = {
@@ -45,6 +63,15 @@ const Checkout = () => {
       total: calculateTotal(),
       status: 'Pending',
       createdAt: new Date().toISOString(),
+      deliveryInfo: {
+        fullName,
+        address,
+        city,
+        state,
+        zipCode,
+        contactNumber,
+        preferredDeliveryDate,
+      },
     };
 
     try {
@@ -74,7 +101,7 @@ const Checkout = () => {
   return (
     <div>
       <div className="checkout-container">
-      <button onClick={() => navigate(-1)}>X</button>
+        <button onClick={() => navigate(-1)}>X</button>
         <h1>Checkout</h1>
         {cartItems.length === 0 ? (
           <p>Your cart is empty.</p>
@@ -105,6 +132,65 @@ const Checkout = () => {
                 </div>
               </div>
             ))}
+            <div className="delivery-form">
+              <h3>Delivery Information</h3>
+              <input
+                type="text"
+                name="fullName"
+                value={deliveryInfo.fullName}
+                onChange={handleDeliveryChange}
+                placeholder="Full Name"
+                required
+              />
+              <input
+                type="text"
+                name="address"
+                value={deliveryInfo.address}
+                onChange={handleDeliveryChange}
+                placeholder="Street Address"
+                required
+              />
+              <input
+                type="text"
+                name="city"
+                value={deliveryInfo.city}
+                onChange={handleDeliveryChange}
+                placeholder="City"
+                required
+              />
+              <input
+                type="text"
+                name="state"
+                value={deliveryInfo.state}
+                onChange={handleDeliveryChange}
+                placeholder="State"
+                required
+              />
+              <input
+                type="text"
+                name="zipCode"
+                value={deliveryInfo.zipCode}
+                onChange={handleDeliveryChange}
+                placeholder="ZIP Code"
+                required
+              />
+              <input
+                type="tel"
+                name="contactNumber"
+                value={deliveryInfo.contactNumber}
+                onChange={handleDeliveryChange}
+                placeholder="Contact Number"
+                required
+              />
+              <input
+                type="date"
+                name="preferredDeliveryDate"
+                value={deliveryInfo.preferredDeliveryDate}
+                onChange={handleDeliveryChange}
+                min={new Date().toISOString().split('T')[0]} // Prevent past dates
+                required
+              />
+            </div>
             <div className="checkout-summary">
               <h3>Total: ₹{calculateTotal()}</h3>
               <button onClick={handleCheckout} disabled={loading}>
