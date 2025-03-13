@@ -3,7 +3,7 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 30px;
-    font-family: "josefin sans";
+    font-family: "Josefin Sans", sans-serif;
 }
 
 /* Back Button */
@@ -44,8 +44,8 @@
 }
 
 .small-images img {
-    width:29%;
-    height:100%;
+    width: 29%;
+    height: 100%;
     object-fit: cover;
     border-radius: 4px;
     cursor: pointer;
@@ -71,10 +71,18 @@
     text-decoration: underline;
 }
 
-/* .product-info {
-    margin-bottom: 30px;
-} */
+/* Rating Summary */
+.rating-summary {
+    margin: 10px 0;
+    font-size: 1.23rem;
+    color: #602E1A;
+}
 
+.rating-summary span:first-child {
+    font-weight: bold;
+}
+
+/* Product Info */
 .info-row {
     display: flex;
     justify-content: space-between;
@@ -87,7 +95,7 @@
     flex: 1;
 }
 
-.info-row p b{
+.info-row p b {
     color: #602E1A;
 }
 
@@ -113,15 +121,158 @@
     font-size: 1.09rem;
 }
 
-.renter-details h3{
+.renter-details h3 {
     text-decoration: underline;
     color: #602E1A;
     font-size: 1.4rem;
 }
 
-.renter-details p b{
+.renter-details p b {
     text-decoration: underline;
     color: #602E1A;
+}
+
+/* Product Buttons */
+.product-buttons {
+    display: flex;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.wishlist-btn,
+.cart-btn {
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    font-family: "Josefin Sans", sans-serif;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #602E1A;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+.wishlist-btn:hover,
+.cart-btn:hover {
+    background-color: #a05d43;
+}
+
+.wishlist-btn:disabled,
+.cart-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+/* Review Form */
+.review-form {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #f9f0ed;
+    border-radius: 8px;
+}
+
+.review-form h3 {
+    margin-bottom: 15px;
+    color: #602E1A;
+    text-decoration: underline;
+    font-size: 1.4rem;
+}
+
+.star-rating {
+    margin-bottom: 15px;
+}
+
+.star {
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #ccc;
+    transition: color 0.2s;
+}
+
+.star.filled {
+    color: #d09c89;
+}
+
+.star:hover {
+    color: #a05d43;
+}
+
+.review-form textarea {
+    width: 97%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #d09c89;
+    border-radius: 5px;
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 1.1rem;
+    resize: vertical;
+}
+
+.submit-review-btn {
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    font-family: "Josefin Sans", sans-serif;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #602E1A;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+.submit-review-btn:hover {
+    background-color: #a05d43;
+}
+
+.submit-review-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+/* Reviews Section */
+.reviews-section {
+    margin-top: 30px;
+}
+
+.reviews-section h3 {
+    margin-bottom: 15px;
+    color: #602E1A;
+    text-decoration: underline;
+    font-size: 1.4rem;
+}
+
+.review {
+    border-bottom: 1px solid #d09c89;
+    padding: 15px 0;
+    font-size: 1.1rem;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    align-items: center;
+}
+
+.review-username {
+    font-weight: bold;
+    color: #602E1A;
+    font-size: 1.2rem;
+    text-transform: capitalize;
+}
+
+.review-header span:last-child {
+    color: #d09c89;
+}
+
+.review p {
+    margin: 5px 0;
+    line-height: 1.5;
+}
+
+.review small {
+    color: #666;
+    font-size: 0.9rem;
 }
 
 /* Responsive Design */
@@ -138,6 +289,33 @@
 }
 
 @media (max-width: 767px) {
+    .product-details-container {
+        padding: 15px;
+    }
+
+    .back-button {
+        margin-left: 0;
+        font-size: 20px;
+    }
+
+    .image-section {
+        margin-top: 0;
+    }
+
+    .main-image {
+        width: 100%;
+    }
+
+    .small-images img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .details-section {
+        margin-left: 0;
+        margin-top: 0;
+    }
+
     .info-row {
         flex-direction: column;
         gap: 10px;
@@ -145,10 +323,15 @@
 
     .product-buttons {
         flex-direction: column;
+        gap: 10px;
     }
 
-    .small-images img {
-        width: 80px;
-        height: 80px;
+    .review-form,
+    .reviews-section {
+        padding: 10px;
+    }
+
+    .review-username {
+        font-size: 1.1rem;
     }
 }
