@@ -1,11 +1,12 @@
 import express from "express";
 import cors from "cors";
 import { MongoClient, ObjectId } from "mongodb";
+import 'dotenv/config';
 
 const ordersRoutes = express.Router();
 ordersRoutes.use(cors());
 
-const uri = process.env.mongo_uri;
+const uri = process.env.MONGO_URI;
 const dbName = 'products';
 
 ordersRoutes.post('/', async (req, res) => {

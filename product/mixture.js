@@ -1,13 +1,14 @@
 import express from "express";
 import cors from "cors";  // Import CORS middleware
 import { MongoClient } from "mongodb";
+import 'dotenv/config';
 
 const mixtureRoutes = express.Router();
 
 // Enable CORS
 mixtureRoutes.use(cors());
 
-const uri = process.env.mongo_uri;  // Local MongoDB URI
+const uri = process.env.MONGO_URI;  // Local MongoDB URI
 const dbName = 'products';  // Database name
 
 // Create a route to fetch all accessories

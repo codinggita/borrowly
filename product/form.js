@@ -1,11 +1,12 @@
 import express from "express";
 import cors from "cors";
 import { MongoClient } from "mongodb";
+import 'dotenv/config';
 
 const formRoutes = express.Router();
 formRoutes.use(cors());
 
-const uri = process.env.mongo_uri;
+const uri = process.env.MONGO_URI;
 const dbName = "products";
 
 // 🔹 POST route to add a product to the database

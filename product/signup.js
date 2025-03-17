@@ -1,11 +1,12 @@
 import express from 'express';
 import cors from "cors";
 import { MongoClient } from 'mongodb';
+import 'dotenv/config';
 
 const usersRoutes = express.Router();
 usersRoutes.use(cors());
 
-const uri = process.env.mongo_uri;  // Local MongoDB URI
+const uri = process.env.MONGO_URI;  // Local MongoDB URI
 const dbName = 'products';
 
 usersRoutes.post('/register', async (req, res) => {
