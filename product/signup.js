@@ -16,6 +16,13 @@ usersRoutes.post('/register', async (req, res) => {
         return res.status(400).json({ message: 'All fields are required' });
     }
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;  // Valid email format
+    const phoneRegex = /^[6-9]\d{9}$/;  // Valid Indian 10-digit phone number (starting with 6-9)
+
+    if (!emailRegex.test(emailOrPhone) && !phoneRegex.test(emailOrPhone)) {
+        return res.status(400).json({ message: 'Enter a valid email or phone number' });
+    }
+
     try {
         const client = await MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
         const db = client.db(dbName);
