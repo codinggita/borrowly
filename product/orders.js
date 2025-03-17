@@ -5,7 +5,7 @@ import { MongoClient, ObjectId } from "mongodb";
 const ordersRoutes = express.Router();
 ordersRoutes.use(cors());
 
-const uri = 'mongodb+srv://isha:ishapatel@cluster0.2dsxv.mongodb.net/';
+const uri = process.env.mongo_uri;
 const dbName = 'products';
 
 ordersRoutes.post('/', async (req, res) => {

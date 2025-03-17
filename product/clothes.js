@@ -7,7 +7,7 @@ const clothesRoutes = express.Router();
 // Enable CORS for this router
 clothesRoutes.use(cors());
 
-const uri = 'mongodb+srv://isha:ishapatel@cluster0.2dsxv.mongodb.net/';  // Local MongoDB URI
+const uri = process.env.mongo_uri;  // Local MongoDB URI
 const dbName = 'products';  // Database name
 
 // Route to fetch all clothes
