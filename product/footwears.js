@@ -1,13 +1,14 @@
 import express from "express";
 import cors from "cors";  // Import CORS middleware
 import { MongoClient } from "mongodb";
+import 'dotenv/config';
 
 const footwearsRoutes = express.Router();
 
 // Enable CORS for this router
 footwearsRoutes.use(cors());
 
-const uri = 'mongodb+srv://isha:ishapatel@cluster0.2dsxv.mongodb.net/';  // Local MongoDB URI
+const uri = process.env.MONGO_URI;  // Local MongoDB URI
 const dbName = 'products';  // Database name
 
 // Route to fetch all footwears
